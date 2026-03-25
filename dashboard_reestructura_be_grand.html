@@ -1,1 +1,517 @@
-<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Be Grand Company Relationships Dashboard</title>\n    <style>\n        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }\n        h1 { color: #333; }\n        table { width: 100%; border-collapse: collapse; margin-top: 20px; }\n        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }\n        th { background-color: #efefef; }\n    </style>\n</head>\n<body>\n    <h1>Be Grand Company Relationships Dashboard</h1>\n    <table>\n        <tr>\n            <th>Project</th>\n            <th>Capital Structure</th>\n            <th>Shareholder Rules</th>\n            <th>Administrative Organs</th>\n        </tr>\n        <tr>\n            <td>Salamanca</td>\n            <td>Structure A</td>\n            <td>Rule A</td>\n            <td>Org A</td>\n        </tr>\n        <tr>\n            <td>Santa Engracia</td>\n            <td>Structure B</td>\n            <td>Rule B</td>\n            <td>Org B</td>\n        </tr>\n        <tr>\n            <td>El Viso</td>\n            <td>Structure C</td>\n            <td>Rule C</td>\n            <td>Org C</td>\n        </tr>\n        <tr>\n            <td>Las Letras</td>\n            <td>Structure D</td>\n            <td>Rule D</td>\n            <td>Org D</td>\n        </tr>\n        <tr>\n            <td>Jerónimos</td>\n            <td>Structure E</td>\n            <td>Rule E</td>\n            <td>Org E</td>\n        </tr>\n        <tr>\n            <td>Olavide</td>\n            <td>Structure F</td>\n            <td>Rule F</td>\n            <td>Org F</td>\n        </tr>\n        <tr>\n            <td>Fernández de la Hoz </td>\n            <td>Structure G</td>\n            <td>Rule G</td>\n            <td>Org G</td>\n        </tr>\n        <tr>\n            <td>Cortes</td>\n            <td>Structure H</td>\n            <td>Rule H</td>\n            <td>Org H</td>\n        </tr>\n        <tr>\n            <td>Padilla 41</td>\n            <td>Structure I</td>\n            <td>Rule I</td>\n            <td>Org I</td>\n        </tr>\n        <tr>\n            <td>El Limonar</td>\n            <td>Structure J</td>\n            <td>Rule J</td>\n            <td>Org J</td>\n        </tr>\n    </table>\n    <script>\n        const projects = [\n            { name: 'Salamanca', capitalStructure: 'Structure A', shareholderRules: 'Rule A', administrativeOrgans: 'Org A' },\n            { name: 'Santa Engracia', capitalStructure: 'Structure B', shareholderRules: 'Rule B', administrativeOrgans: 'Org B' },\n            { name: 'El Viso', capitalStructure: 'Structure C', shareholderRules: 'Rule C', administrativeOrgans: 'Org C' },\n            { name: 'Las Letras', capitalStructure: 'Structure D', shareholderRules: 'Rule D', administrativeOrgans: 'Org D' },\n            { name: 'Jerónimos', capitalStructure: 'Structure E', shareholderRules: 'Rule E', administrativeOrgans: 'Org E' },\n            { name: 'Olavide', capitalStructure: 'Structure F', shareholderRules: 'Rule F', administrativeOrgans: 'Org F' },\n            { name: 'Fernández de la Hoz', capitalStructure: 'Structure G', shareholderRules: 'Rule G', administrativeOrgans: 'Org G' },\n            { name: 'Cortes', capitalStructure: 'Structure H', shareholderRules: 'Rule H', administrativeOrgans: 'Org H' },\n            { name: 'Padilla 41', capitalStructure: 'Structure I', shareholderRules: 'Rule I', administrativeOrgans: 'Org I' },\n            { name: 'El Limonar', capitalStructure: 'Structure J', shareholderRules: 'Rule J', administrativeOrgans: 'Org J' }\n        ];\n    </script>\n</body>\n</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be Grand · Dashboard de Relaciones Societarias</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            /* ── Brand palette · Manual de Identidad Grand Life ── */
+            --pantone-282:    #041E42;   /* Navy base */
+            --pantone-281:    #002058;   /* Navy tinta directa */
+            --pantone-432:    #333F48;   /* Dark slate */
+            --pantone-7621:   #AF2F2C;   /* Red */
+            --pantone-378:    #788920;   /* Olive */
+            --pantone-7565:   #D28122;   /* Orange accent */
+
+            --bg-base:        #010d1f;
+            --bg-surface:     #041E42;
+            --bg-card:        #072050;
+            --bg-card-hover:  #0a2860;
+            --border:         rgba(255,255,255,0.08);
+            --border-hover:   rgba(210,129,34,0.5);
+            --accent:         #D28122;
+            --accent-light:   #e8a04a;
+            --accent-dim:     rgba(210,129,34,0.14);
+            --red:            #AF2F2C;
+            --olive:          #788920;
+            --slate:          #333F48;
+            --text-primary:   #ffffff;
+            --text-secondary: #8fa3c0;
+            --text-muted:     #3d5a80;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-base);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── Background ambient ── */
+        body::before {
+            content: '';
+            position: fixed; inset: 0; z-index: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 10% 0%, rgba(210,129,34,0.07) 0%, transparent 55%),
+                radial-gradient(ellipse 60% 40% at 90% 100%, rgba(175,47,44,0.06) 0%, transparent 55%),
+                radial-gradient(ellipse 50% 60% at 50% 50%, rgba(4,30,66,0.8) 0%, transparent 80%);
+            pointer-events: none;
+        }
+
+        /* ── Header ── */
+        header {
+            position: relative; z-index: 10;
+            border-bottom: 1px solid var(--border);
+            background: rgba(10,12,18,0.85);
+            backdrop-filter: blur(20px);
+            padding: 0 40px;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 72px;
+        }
+
+        .logo-group { display: flex; align-items: center; gap: 14px; }
+
+        .logo-mark {
+            width: 38px; height: 38px;
+            background: linear-gradient(135deg, var(--pantone-7565), var(--accent-light));
+            border-radius: 10px;
+            display: grid; place-items: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px; font-weight: 700;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(210,129,34,0.35);
+        }
+
+        .brand { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.02em; }
+        .brand span { color: var(--accent); }
+
+        .header-meta { font-size: 12px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+        .header-right { display: flex; align-items: center; gap: 20px; }
+
+        .live-badge {
+            display: flex; align-items: center; gap: 7px;
+            font-size: 11px; font-weight: 500; color: var(--text-secondary);
+            letter-spacing: 0.06em; text-transform: uppercase;
+        }
+        .live-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.85); }
+        }
+
+        /* ── Main layout ── */
+        main {
+            position: relative; z-index: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 48px 40px 80px;
+        }
+
+        /* ── Hero section ── */
+        .hero {
+            margin-bottom: 48px;
+        }
+        .hero-eyebrow {
+            font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--accent); margin-bottom: 12px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .hero-eyebrow::before {
+            content: '';
+            display: inline-block; width: 24px; height: 1px; background: var(--accent);
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 700; line-height: 1.15;
+            margin-bottom: 14px;
+        }
+        .hero h1 em {
+            font-style: normal;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { font-size: 15px; color: var(--text-secondary); max-width: 540px; line-height: 1.6; }
+
+        /* ── Stats bar ── */
+        .stats-bar {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 48px;
+        }
+        .stat-item {
+            background: var(--bg-surface);
+            padding: 20px 24px;
+            transition: background 0.2s;
+        }
+        .stat-item:hover { background: var(--bg-card-hover); }
+        .stat-label { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+        .stat-value { font-size: 26px; font-weight: 700; color: var(--text-primary); }
+        .stat-value.gold { color: var(--accent); }
+
+        /* ── Toolbar ── */
+        .toolbar {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 24px; gap: 16px; flex-wrap: wrap;
+        }
+        .toolbar-left { display: flex; align-items: center; gap: 12px; }
+
+        .search-wrapper {
+            position: relative;
+        }
+        .search-icon {
+            position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+            color: var(--text-muted); pointer-events: none;
+            font-size: 14px;
+        }
+        #searchInput {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 16px 10px 40px;
+            font-family: inherit; font-size: 13px;
+            color: var(--text-primary);
+            width: 260px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+        #searchInput::placeholder { color: var(--text-muted); }
+        #searchInput:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-dim);
+        }
+
+        .view-toggle { display: flex; gap: 2px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; padding: 3px; }
+        .view-btn {
+            background: none; border: none; cursor: pointer;
+            padding: 7px 10px; border-radius: 7px;
+            color: var(--text-muted); font-size: 14px;
+            transition: all 0.2s;
+        }
+        .view-btn.active { background: var(--bg-card-hover); color: var(--text-primary); }
+        .view-btn:hover:not(.active) { color: var(--text-secondary); }
+
+        .count-badge {
+            font-size: 12px; font-weight: 500; color: var(--text-secondary);
+        }
+        .count-badge strong { color: var(--accent); }
+
+        /* ── Cards grid ── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 20px;
+        }
+        .projects-grid.list-view {
+            grid-template-columns: 1fr;
+        }
+
+        /* ── Project card ── */
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            animation: fadeUp 0.4s ease both;
+            cursor: default;
+        }
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,175,55,0.15);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-header {
+            padding: 22px 24px 18px;
+            display: flex; align-items: flex-start; justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            position: relative; overflow: hidden;
+        }
+        .card-header::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--accent-from, #d4af37), var(--accent-to, #f0d060));
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+        .project-card:hover .card-header::before { opacity: 1; }
+
+        .card-number {
+            font-size: 11px; font-weight: 600; color: var(--text-muted);
+            letter-spacing: 0.1em; margin-bottom: 6px;
+        }
+        .card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px; font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .status-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #22c55e; margin-top: 6px; flex-shrink: 0;
+            box-shadow: 0 0 8px rgba(34,197,94,0.5);
+        }
+
+        .card-body { padding: 20px 24px; }
+
+        .card-field { margin-bottom: 14px; }
+        .card-field:last-child { margin-bottom: 0; }
+
+        .field-label {
+            font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+        .field-value {
+            display: inline-flex; align-items: center; gap: 7px;
+        }
+
+        .badge {
+            display: inline-flex; align-items: center;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px; font-weight: 500;
+            border: 1px solid transparent;
+        }
+
+        /* badges con paleta brand */
+        .badge-structure { background: rgba(210,129,34,0.12); color: var(--accent-light); border-color: rgba(210,129,34,0.3); }
+        .badge-rule      { background: rgba(175,47,44,0.12);  color: #e07c7a;             border-color: rgba(175,47,44,0.3); }
+        .badge-org       { background: rgba(120,137,32,0.12); color: #b0c44a;             border-color: rgba(120,137,32,0.3); }
+
+        .badge-letter {
+            width: 20px; height: 20px; border-radius: 4px;
+            display: grid; place-items: center;
+            font-size: 10px; font-weight: 700;
+            background: rgba(255,255,255,0.06);
+            color: var(--text-muted);
+        }
+
+        /* List view adjustments */
+        .list-view .project-card { border-radius: 12px; }
+        .list-view .card-header { border-bottom: none; border-right: 1px solid var(--border); flex: 0 0 200px; }
+        .list-view .project-card > div { display: flex; flex-direction: row; }
+        .list-view .card-body {
+            display: flex; gap: 32px; align-items: center;
+            padding: 16px 24px; flex: 1;
+        }
+        .list-view .card-field { margin-bottom: 0; }
+
+        /* ── Empty state ── */
+        .empty-state {
+            text-align: center; padding: 80px 40px;
+            color: var(--text-muted); display: none;
+        }
+        .empty-state svg { margin-bottom: 16px; opacity: 0.3; }
+        .empty-state p { font-size: 14px; }
+
+        /* ── Footer ── */
+        footer {
+            position: relative; z-index: 1;
+            border-top: 1px solid var(--border);
+            padding: 24px 40px;
+            display: flex; align-items: center; justify-content: space-between;
+            font-size: 12px; color: var(--text-muted);
+        }
+        footer strong { color: var(--accent); font-weight: 600; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            header { padding: 0 20px; }
+            main { padding: 32px 20px 60px; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+            .projects-grid { grid-template-columns: 1fr; }
+            #searchInput { width: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+    <div class="logo-group">
+        <div class="logo-mark">BG</div>
+        <div>
+            <div class="brand">Be <span>Grand</span></div>
+            <div class="header-meta">Relaciones Societarias</div>
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="live-badge">
+            <span class="live-dot"></span>
+            Activo
+        </div>
+    </div>
+</header>
+
+<!-- ── Main ── -->
+<main>
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-eyebrow">Dashboard · 2024</div>
+        <h1>Estructura de <em>Proyectos</em><br>Be Grand</h1>
+        <p>Panel centralizado de relaciones societarias, estructura de capital y órganos administrativos de cada proyecto.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-label">Proyectos totales</div>
+            <div class="stat-value gold" id="stat-total">10</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-label">Estructuras activas</div>
+            <div class="stat-value">10</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-label">Pactos de socios</div>
+            <div class="stat-value">10</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-label">Órganos admin.</div>
+            <div class="stat-value">10</div>
+        </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <div class="search-wrapper">
+                <span class="search-icon">⌕</span>
+                <input type="text" id="searchInput" placeholder="Buscar proyecto…" oninput="filterProjects()">
+            </div>
+            <div class="view-toggle">
+                <button class="view-btn active" id="btn-grid" onclick="setView('grid')" title="Vista cuadrícula">⊞</button>
+                <button class="view-btn" id="btn-list" onclick="setView('list')" title="Vista lista">☰</button>
+            </div>
+        </div>
+        <div class="count-badge">Mostrando <strong id="count-visible">10</strong> de 10 proyectos</div>
+    </div>
+
+    <!-- Grid -->
+    <div class="projects-grid" id="projectsGrid"></div>
+
+    <!-- Empty state -->
+    <div class="empty-state" id="emptyState">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <p>No se encontraron proyectos que coincidan con la búsqueda.</p>
+    </div>
+
+</main>
+
+<!-- ── Footer ── -->
+<footer>
+    <span>© 2024 <strong>Be Grand</strong> · Relaciones Societarias</span>
+    <span>Confidencial · Uso interno</span>
+</footer>
+
+<script>
+    const projects = [
+        { name: 'Salamanca',           capitalStructure: 'Structure A', shareholderRules: 'Rule A', administrativeOrgans: 'Org A', letter: 'A' },
+        { name: 'Santa Engracia',      capitalStructure: 'Structure B', shareholderRules: 'Rule B', administrativeOrgans: 'Org B', letter: 'B' },
+        { name: 'El Viso',             capitalStructure: 'Structure C', shareholderRules: 'Rule C', administrativeOrgans: 'Org C', letter: 'C' },
+        { name: 'Las Letras',          capitalStructure: 'Structure D', shareholderRules: 'Rule D', administrativeOrgans: 'Org D', letter: 'D' },
+        { name: 'Jerónimos',           capitalStructure: 'Structure E', shareholderRules: 'Rule E', administrativeOrgans: 'Org E', letter: 'E' },
+        { name: 'Olavide',             capitalStructure: 'Structure F', shareholderRules: 'Rule F', administrativeOrgans: 'Org F', letter: 'F' },
+        { name: 'Fernández de la Hoz', capitalStructure: 'Structure G', shareholderRules: 'Rule G', administrativeOrgans: 'Org G', letter: 'G' },
+        { name: 'Cortes',              capitalStructure: 'Structure H', shareholderRules: 'Rule H', administrativeOrgans: 'Org H', letter: 'H' },
+        { name: 'Padilla 41',          capitalStructure: 'Structure I', shareholderRules: 'Rule I', administrativeOrgans: 'Org I', letter: 'I' },
+        { name: 'El Limonar',          capitalStructure: 'Structure J', shareholderRules: 'Rule J', administrativeOrgans: 'Org J', letter: 'J' }
+    ];
+
+    let currentView = 'grid';
+
+    function renderCards(data) {
+        const grid = document.getElementById('projectsGrid');
+        const empty = document.getElementById('emptyState');
+
+        if (data.length === 0) {
+            grid.innerHTML = '';
+            empty.style.display = 'block';
+            document.getElementById('count-visible').textContent = '0';
+            return;
+        }
+
+        empty.style.display = 'none';
+        document.getElementById('count-visible').textContent = data.length;
+
+        grid.innerHTML = data.map((p, i) => `
+            <div class="project-card" style="animation-delay:${i * 0.05}s">
+                <div>
+                    <div class="card-header">
+                        <div>
+                            <div class="card-number">Proyecto #${String(i + 1).padStart(2, '0')}</div>
+                            <div class="card-name">${p.name}</div>
+                        </div>
+                        <div class="status-dot"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-field">
+                            <div class="field-label">Estructura de Capital</div>
+                            <div class="field-value">
+                                <span class="badge badge-structure">${p.capitalStructure}</span>
+                            </div>
+                        </div>
+                        <div class="card-field">
+                            <div class="field-label">Pacto de Socios</div>
+                            <div class="field-value">
+                                <span class="badge badge-rule">${p.shareholderRules}</span>
+                            </div>
+                        </div>
+                        <div class="card-field">
+                            <div class="field-label">Órgano Administrativo</div>
+                            <div class="field-value">
+                                <span class="badge badge-org">${p.administrativeOrgans}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function filterProjects() {
+        const q = document.getElementById('searchInput').value.toLowerCase().trim();
+        const filtered = q ? projects.filter(p => p.name.toLowerCase().includes(q)) : projects;
+        renderCards(filtered);
+    }
+
+    function setView(view) {
+        currentView = view;
+        const grid = document.getElementById('projectsGrid');
+        const btnGrid = document.getElementById('btn-grid');
+        const btnList = document.getElementById('btn-list');
+
+        if (view === 'list') {
+            grid.classList.add('list-view');
+            btnList.classList.add('active');
+            btnGrid.classList.remove('active');
+        } else {
+            grid.classList.remove('list-view');
+            btnGrid.classList.add('active');
+            btnList.classList.remove('active');
+        }
+    }
+
+    // Init
+    renderCards(projects);
+</script>
+</body>
+</html>
